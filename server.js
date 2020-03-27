@@ -19,7 +19,11 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("message", "A user has joined the chat");
     // when client dissconnertcs
     socket.on("disconnect", () => {
-        io.emmit("message", "A user has left the chat")
+        io.emit("message", "A user has left the chat")
+    })
+    // Listen for chat msg
+    socket.on("chatMessage", (msg) => {
+        io.emit("message", msg);
     })
 })
 const PORT = 3000 || process.env.PORT;
